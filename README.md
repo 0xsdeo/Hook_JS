@@ -33,27 +33,27 @@
 
 - <a id="hook_localStorage" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_window/hook_localStorage.js">hook_window/hook_localStorage.js</a>
 
-脚本描述：当js调用了localStorage某个方法时会打印出相对应的内容。
+脚本描述：当js调用了localStorage某个方法时会打印出相对应的内容，并且会打印出调用了该方法的堆栈。
 
 效果：
 保存数据到localStorage：
-![1739810665095](image/README/1739810665095.png)
+![1739811557117](image/README/1739811557117.png)
 ![1739810502184](image/README/1739810502184.png)
 
 从localStorage获取数据：
-![1739810541984](image/README/1739810541984.png)
+![1739811594917](image/README/1739811594917.png)
 
 从localStorage删除保存的数据：
-![1739810570710](image/README/1739810570710.png)
+![1739811620261](image/README/1739811620261.png)
 ![1739810581039](image/README/1739810581039.png)
 
 从localStorage删除所有保存的数据：
-![1739810613559](image/README/1739810613559.png)
+![1739811644886](image/README/1739811644886.png)
 ![1739810627830](image/README/1739810627830.png)
 
 - <a id="hook_sessionStorage" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_window/hook_sessionStorage.js">hook_window/hook_sessionStorage.js</a>
 
-脚本描述：当js调用了sessionStorage某个方法时会打印出相对应的内容。
+脚本描述：当js调用了sessionStorage某个方法时会打印出相对应的内容，并且会打印出调用了该方法的堆栈。
 
 效果同上。
 
@@ -66,10 +66,10 @@
 
 - <a id="Hook_CryptoJS" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_CryptoJS/Hook_CryptoJS(%E6%9C%AA%E5%AE%8C%E6%88%90%E4%BD%9C).js">Hook_CryptoJS/Hook_CryptoJS(未完成作).js</a>
 
-脚本描述：当调用了CryptoJS库中的某个加密/解密方法时会自动打印出加密或解密的明文或密文。
+脚本描述：当调用了CryptoJS库中的某个加密/解密方法时会自动打印出加密或解密的明文或密文，并且会打印出调用了该方法的堆栈。
 
 效果：
-![1739809354003](image/README/1739809354003.png)
+![1739811688782](image/README/1739811688782.png)
 
 注意事项：本脚本为未完成作，算法不完整以及可能会有报错，但是我不会再继续对这个脚本进行完善补充，原因有以下两点：
 
