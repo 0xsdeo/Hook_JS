@@ -6,10 +6,14 @@
 2. 以下所有脚本除hook_debugger下的脚本以外，我在重写方法时都没有为了它们重写toString方法以防止网站js检测方法是否被重写过。
 3. 以下所有本人所写的脚本中如果包含`console.log(new Error().stack);`这句代码，全都可以改写为`debugger`，以方便使用时查看堆栈。
 4. 当hook后依然不能实现功能，请自查油猴或其他插件加载的脚本是不是做了同样的操作，例如重写Function等等，个人建议使用时除不是自己写的脚本(指没有做要用的脚本同样动作的)都关闭。
-5. hook_debugger\Hook_eval和hook_debugger\Hook_Function文件夹下的脚本不再继续更新。
+5. hook_debugger\Hook_eval、hook_debugger\Hook_Function和Hook_CryptoJS文件夹下的脚本不再继续更新。
 
 ## 脚本目录
 
+- <a href="#hook_localStorage">hook_window/hook_localStorage.js</a>
+- <a href="#hook_sessionStorage">hook_window/hook_sessionStorage.js</a>
+- <a href="#Hook_innerHTML">Hook_xss/Hook_innerHTML.js</a>
+- <a href="#Hook_CryptoJS">Hook_CryptoJS/Hook_CryptoJS(未完成作).js</a>
 - <a href="#Hook_fetch">Hook_fetch.js</a>
 - <a href="#Fixed_window_size">实用小脚本/Fixed_window_size.js</a>
 - <a href="#Hook_cookie v0.1">Hook_cookie/Hook_cookie v0.1.js</a>
@@ -26,6 +30,54 @@
 - <a href="#Hook_eval">hook_debugger/Hook_eval</a>
 
 ## 脚本描述及注意事项
+
+- <a id="hook_localStorage" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_window/hook_localStorage.js">hook_window/hook_localStorage.js</a>
+
+脚本描述：当js调用了localStorage某个方法时会打印出相对应的内容。
+
+效果：
+保存数据到localStorage：
+![1739810665095](image/README/1739810665095.png)
+![1739810502184](image/README/1739810502184.png)
+
+从localStorage获取数据：
+![1739810541984](image/README/1739810541984.png)
+
+从localStorage删除保存的数据：
+![1739810570710](image/README/1739810570710.png)
+![1739810581039](image/README/1739810581039.png)
+
+从localStorage删除所有保存的数据：
+![1739810613559](image/README/1739810613559.png)
+![1739810627830](image/README/1739810627830.png)
+
+- <a id="hook_sessionStorage" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_window/hook_sessionStorage.js">hook_window/hook_sessionStorage.js</a>
+
+脚本描述：当js调用了sessionStorage某个方法时会打印出相对应的内容。
+
+效果同上。
+
+- <a id="Hook_innerHTML" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_xss/Hook_innerHTML.js">Hook_xss/Hook_innerHTML.js</a>
+
+脚本描述：当js通过元素的innerHTML属性设置元素内容时就会打印出元素。
+
+效果：
+![1739810183632](image/README/1739810183632.gif)
+
+- <a id="Hook_CryptoJS" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_CryptoJS/Hook_CryptoJS(%E6%9C%AA%E5%AE%8C%E6%88%90%E4%BD%9C).js">Hook_CryptoJS/Hook_CryptoJS(未完成作).js</a>
+
+脚本描述：当调用了CryptoJS库中的某个加密/解密方法时会自动打印出加密或解密的明文或密文。
+
+效果：
+![1739809354003](image/README/1739809354003.png)
+
+注意事项：本脚本为未完成作，算法不完整以及可能会有报错，但是我不会再继续对这个脚本进行完善补充，原因有以下两点：
+
+1. CryptoJS是一个现成的实例对象，hook方法只能从它那儿改：
+![1739809037219](image/README/1739809037219.png)
+2. 有的网站在导入CryptoJS库时都会把CryptoJS对象名换成别的，所以我个人认为没有必要再去专门写一个脚本hook这个库。
+
+当然了，如果有大牛想继续完成我未完成的部分，可以通过我的公众号联系我，我代表各位感谢您。
 
 - <a id="Hook_fetch" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_fetch.js">Hook_fetch.js</a>
 
