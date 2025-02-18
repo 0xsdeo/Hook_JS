@@ -22,8 +22,8 @@
             return get_accessor.call(this); // 当网站js获取目标属性值时调用原属性getter返回结果
         },
         set: function () {
-            console.log(this);
             set_accessor.call(this, ...arguments);// 将网站js设置目标属性值时所传入的内容传给原setter设置并返回结果
+            console.log(this);
         }
     });
 })();
