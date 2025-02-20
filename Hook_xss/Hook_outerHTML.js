@@ -22,6 +22,7 @@
             return get_accessor.call(this); // 当网站js获取目标属性值时调用原属性getter返回结果
         },
         set: function () {
+            console.log(new Error().stack);
             if (arguments.length === 1) {
                 console.log(arguments[0]);
             }
