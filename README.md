@@ -67,10 +67,10 @@
 
 - <a id="Hook_outerHTML" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_xss/Hook_outerHTML.js">Hook_xss/Hook_outerHTML.js</a>
 
-脚本描述：当js通过元素的outerHTML属性设置元素内容时就会打印出设置的内容。
+脚本描述：当js通过元素的outerHTML属性设置元素内容时就会打印出设置的内容以及调用堆栈。
 
 效果：
-![1740064624914](image/README/1740064624914.png)
+![1740065836640](image/README/1740065836640.png)
 
 - <a id="Hook_CryptoJS" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_CryptoJS/Hook_CryptoJS(%E6%9C%AA%E5%AE%8C%E6%88%90%E4%BD%9C).js">Hook_CryptoJS/Hook_CryptoJS(未完成作).js</a>
 
