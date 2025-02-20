@@ -13,6 +13,7 @@
 - <a href="#hook_localStorage">hook_window/hook_localStorage.js</a>
 - <a href="#hook_sessionStorage">hook_window/hook_sessionStorage.js</a>
 - <a href="#Hook_innerHTML">Hook_xss/Hook_innerHTML.js</a>
+- <a href="#Hook_outerHTML">Hook_xss/Hook_outerHTML.js</a>
 - <a href="#Hook_CryptoJS">Hook_CryptoJS/Hook_CryptoJS(未完成作).js</a>
 - <a href="#Hook_fetch">Hook_fetch.js</a>
 - <a href="#Fixed_window_size">实用小脚本/Fixed_window_size.js</a>
@@ -63,6 +64,13 @@
 
 效果：
 ![1739810183632](image/README/1739810183632.gif)
+
+- <a id="Hook_outerHTML" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_xss/Hook_outerHTML.js">Hook_xss/Hook_outerHTML.js</a>
+
+脚本描述：当js通过元素的outerHTML属性设置元素内容时就会打印出设置的内容。
+
+效果：
+![1740064624914](image/README/1740064624914.png)
 
 - <a id="Hook_CryptoJS" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_CryptoJS/Hook_CryptoJS(%E6%9C%AA%E5%AE%8C%E6%88%90%E4%BD%9C).js">Hook_CryptoJS/Hook_CryptoJS(未完成作).js</a>
 
