@@ -1,5 +1,7 @@
 # 个人JS Hook脚本分享
 
+本项目脚本配置教程视频：`https://www.bilibili.com/video/BV1rG9oYzEUH/`
+
 ## 必看说明
 
 1. 以下所有hook脚本在油猴里的运行时期皆为**document-start**。
