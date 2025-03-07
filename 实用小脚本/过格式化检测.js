@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         0xsdeo
+// @name         过格式化检测
 // @namespace    https://github.com/0xsdeo/Hook_JS
 // @version      2025-03-07
 // @description  绕过js检测代码是否被格式化过

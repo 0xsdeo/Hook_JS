@@ -112,7 +112,7 @@
 ![1736611037870](image/README/1736611037870.png)
 ![1736611051478](image/README/1736611051478.png)
 
-- <a id="bypass_format_detection" href="">实用小脚本/过格式化检测.js</a>
+- <a id="bypass_format_detection" href="https://github.com/0xsdeo/Hook_JS/blob/main/%E5%AE%9E%E7%94%A8%E5%B0%8F%E8%84%9A%E6%9C%AC/%E8%BF%87%E6%A0%BC%E5%BC%8F%E5%8C%96%E6%A3%80%E6%B5%8B.js">实用小脚本/过格式化检测.js</a>
 
 脚本描述：绕过js检测代码是否被格式化过。
 
