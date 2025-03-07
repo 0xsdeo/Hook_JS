@@ -19,6 +19,7 @@
 - <a href="#Hook_CryptoJS">Hook_CryptoJS/Hook_CryptoJS(未完成作).js</a>
 - <a href="#Hook_fetch">Hook_fetch.js</a>
 - <a href="#Fixed_window_size">实用小脚本/Fixed_window_size.js</a>
+- <a href="#bypass_format_detection">实用小脚本/过格式化检测.js</a>
 - <a href="#Hook_cookie v0.1">Hook_cookie/Hook_cookie v0.1.js</a>
 - <a href="#Hook_cookie v0.2">Hook_cookie/Hook_cookie v0.2.js</a>
 - <a href="#hook_clear">hook_console/hook_clear.js</a>
@@ -110,6 +111,17 @@
 在打开Devtools的前提下未Hook和已Hook的效果图：
 ![1736611037870](image/README/1736611037870.png)
 ![1736611051478](image/README/1736611051478.png)
+
+- <a id="bypass_format_detection" href="">实用小脚本/过格式化检测.js</a>
+
+脚本描述：绕过js检测代码是否被格式化过。
+
+注意事项：
+
+1. **把本脚本的代码放到目标脚本的最上面即可。**
+2. 本脚本为初版脚本，如有绕不过去的代码可联系我。
+
+感谢`我真的不是蜘蛛`公众号号主提供的测试样本。
 
 - <a id="Hook_cookie v0.1" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_cookie/Hook_cookie%20v0.1.js">Hook_cookie/Hook_cookie v0.1.js</a>
 
