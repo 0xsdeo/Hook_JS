@@ -39,7 +39,7 @@
 
 - <a id="hook_table" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_console/hook_table.js">hook_console/hook_table.js</a>
 
-脚本描述：绕过js检测运行时间差来实现的反调试。
+脚本描述：绕过js检测运行时间差来实现反调试。
 
 - <a id="Forbidden_log" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_console/Forbidden_log.js">hook_console/Forbidden_log.js</a>
 
