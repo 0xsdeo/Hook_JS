@@ -2,7 +2,7 @@
 // @name         Forbidden_log
 // @namespace    https://github.com/0xsdeo/Hook_JS
 // @version      2025-03-14
-// @description  Forbidden console.log
+// @description  重写console.log为空函数，以此来阻止网站js打印内容。
 // @author       0xsdeo
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==

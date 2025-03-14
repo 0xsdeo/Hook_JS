@@ -43,7 +43,7 @@
 
 - <a id="Forbidden_log" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_console/Forbidden_log.js">hook_console/Forbidden_log.js</a>
 
-脚本描述：禁用console.log。
+脚本描述：重写console.log为空函数，以此来阻止网站js打印内容。
 
 - <a id="hook_localStorage" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_window/hook_localStorage.js">hook_window/hook_localStorage.js</a>
 
