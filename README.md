@@ -12,6 +12,8 @@
 
 ## 脚本目录
 
+- <a href="#hook_table">hook_console/hook_table.js</a>
+- <a href="#Forbidden_log">hook_console/Forbidden_log.js</a>
 - <a href="#hook_localStorage">hook_window/hook_localStorage.js</a>
 - <a href="#hook_sessionStorage">hook_window/hook_sessionStorage.js</a>
 - <a href="#Hook_innerHTML">Hook_xss/Hook_innerHTML.js</a>
@@ -34,6 +36,14 @@
 - <a href="#Hook_eval">hook_debugger/Hook_eval</a>
 
 ## 脚本描述及注意事项
+
+- <a id="hook_table" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_console/hook_table.js">hook_console/hook_table.js</a>
+
+脚本描述：绕过js检测运行时间差来实现的反调试。
+
+- <a id="Forbidden_log" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_console/Forbidden_log.js">hook_console/Forbidden_log.js</a>
+
+脚本描述：禁用console.log。
 
 - <a id="hook_localStorage" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_window/hook_localStorage.js">hook_window/hook_localStorage.js</a>
 
