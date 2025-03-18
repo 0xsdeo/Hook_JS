@@ -23,10 +23,7 @@
     //     return temp_toString.apply(this, arguments);
     // }
 
-    // let temp_table = console.table; // 将xxx修改为要hook的方法，temp_xxx变量名可以根据需要进行修改命名
-
-    console.table = function () { // 将xxx修改为要hook的方法
+    console.table = function () {
         // // 在这里写你想让hook后的方法执行的代码
-        // return temp_table(...arguments); // 将网站js调用目标方法时所传入的内容传给原方法执行并返回结果
     }
 })();
