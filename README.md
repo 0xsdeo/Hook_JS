@@ -218,7 +218,7 @@
 
 详见：<a href="https://mp.weixin.qq.com/s/yBoy-jG3grI-t0EUIAQNJg">JS逆向系列09-Js Hook</a>
 
-- <a id="Hook_xhr" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_xhr/Hook_xhr.js">Hook_xhr.js</a>
+- <a id="Hook_xhr" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_xhr/Hook_xhr.js">Hook_xhr/Hook_xhr.js</a>
 
 脚本描述：当设置了请求头时就会打印堆栈信息和设置的请求头内容；发送请求前会打印出堆栈信息和请求信息。
 
@@ -229,7 +229,7 @@
 ![1734623360246](image/README/1734623360246.png)
 ![1734623312217](image/README/1734623312217.png)
 
-- <a id="Hook_xhr(assign)" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_xhr/Hook_xhr(assign).js">Hook_xhr(assign).js</a>
+- <a id="Hook_xhr(assign)" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_xhr/Hook_xhr(assign).js">Hook_xhr/Hook_xhr(assign).js</a>
 
 脚本描述：
 
