@@ -30,7 +30,8 @@
 - <a href="#hook_close">hook_window/hook_close.js</a>
 - <a href="#hook_history">hook_window/hook_history.js</a>
 - <a href="#hook_JSON">hook_JSON.js</a>
-- <a href="#Hook_xhr">Hook_xhr.js</a>
+- <a href="#Hook_xhr">Hook_xhr/Hook_xhr.js</a>
+- <a href="#Hook_xhr(assign)">Hook_xhr/Hook_xhr(assign).js</a>
 - <a href="#Bypass_Debugger">hook_debugger/Bypass_Debugger</a>
 - <a href="#Hook_Function">hook_debugger/Hook_Function/Hook_Function.js</a>
 - <a href="#Hook_eval">hook_debugger/Hook_eval</a>
@@ -217,7 +218,7 @@
 
 详见：<a href="https://mp.weixin.qq.com/s/yBoy-jG3grI-t0EUIAQNJg">JS逆向系列09-Js Hook</a>
 
-- <a id="Hook_xhr" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_xhr.js">Hook_xhr.js</a>
+- <a id="Hook_xhr" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_xhr/Hook_xhr.js">Hook_xhr.js</a>
 
 脚本描述：当设置了请求头时就会打印堆栈信息和设置的请求头内容；发送请求前会打印出堆栈信息和请求信息。
 
@@ -227,6 +228,26 @@
 注意事项：当打印的request内容为`[object Blob]`时，则表示请求内容为二进制流，例如：
 ![1734623360246](image/README/1734623360246.png)
 ![1734623312217](image/README/1734623312217.png)
+
+- <a id="Hook_xhr(assign)" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_xhr/Hook_xhr(assign).js">Hook_xhr(assign).js</a>
+
+脚本描述：
+
+1. 当设置了请求头时就会打印堆栈信息和设置的请求头内容；发送请求前会打印出堆栈信息和请求信息。
+2. **本脚本是专门用来捕获指定请求头以及请求URL的hook_xhr脚本。**
+
+注意事项：
+
+1. 使用时将想捕获的请求头或请求URL放入到`assign_RequestHeader`或`assign_url`变量中即可。
+2. 因为本脚本是专门提供捕获指定URL以及指定请求头的hook xhr脚本，所以用户如果没有指定请求头或指定请求URL`将不会打印任何内容`。
+3. 本脚本可以不需要同时指定请求头或请求URL，如果单独设置了一个也会打印出包含了指定请求头或请求URL的内容。
+4. 使用本脚本时如果也想继续抓取请求的内容，那么就需要单独设置一下捕获哪个请求URL，如果不设置是不会打印出请求的内容。
+
+效果：
+![1746762879445](image/README/1746762879445.png)
+![1746762987540](image/README/1746762987540.png)
+
+如对本脚本有更好的建议可以提交Issues或者联系我。
 
 - <a id="Bypass_Debugger" href="https://github.com/0xsdeo/Hook_JS/tree/main/hook_debugger/Bypass_Debugger">hook_debugger/Bypass_Debugger</a>
 
