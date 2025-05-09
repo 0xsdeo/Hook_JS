@@ -32,20 +32,20 @@
                 "请求 " + this.url + " 时请求头被设置\n" +
                 "请求头：" + arguments[0] + ": " + arguments[1]
             )
-            console.log(new Error().stack);
+            console.log(new Error().stack); // 当指定了请求头和请求URL时，如果想断点可以在此处写入debugger。
             return hook_setRequestHeader.call(this, ...arguments);
         } else if (assign_url !== '' && this.url.indexOf(assign_url) !== -1) {
             console.log(
                 "请求 " + this.url + " 时请求头被设置\n" +
                 "请求头：" + arguments[0] + ": " + arguments[1]
             )
-            console.log(new Error().stack);
+            console.log(new Error().stack); // 当指定了请求URL时，如果想断点可以在此处写入debugger。
         } else if (assign_RequestHeader !== '' && arguments[0].indexOf(assign_RequestHeader) !== -1) {
             console.log(
                 "请求 " + this.url + " 时请求头被设置\n" +
                 "请求头：" + arguments[0] + ": " + arguments[1]
             )
-            console.log(new Error().stack);
+            console.log(new Error().stack); // 当指定了请求头时，如果想断点可以在此处写入debugger。
         }
         return hook_setRequestHeader.call(this, ...arguments);
     }
