@@ -315,6 +315,9 @@ Hook_eval亦是如此，所以要是两个一块用的话可能会出一些问�
 
 如有bug或其他问题可提交issues，或者关注公众号Spade sec联系我。
 
+本开源项目微信交流群：
+![1752649959430](image/README/1752649959430.jpg)
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=0xsdeo/Hook_JS&type=Date)](https://star-history.com/#0xsdeo/Hook_JS&Date)
