@@ -287,9 +287,10 @@ setInterval(dbg,3000);
 
 以上这两种设条件断点就能过(如果不知道怎么设置条件断点的可以去看一下我之前写的反调试与反反调试一文)，或者替换也行，不需要hook的，所以我就暂时没去管这个。
 
-4. 如果发现hook后站点js出现异常，可以考虑使用备用脚本，也就是`Bypass_Debugger(备用).js`。
-
-5. Bypass_Debugger和Bypass_Debugger(Proxy)这两个脚本都可以使用，两个脚本的区别就是Bypass_Debugger(Proxy)脚本是通过Proxy重写的Function，我的建议是继续使用Bypass_Debugger脚本，Bypass_Debugger(Proxy)脚本可以拿来做学习研究。
+4. 如果hook后站点js出现异常，是因为eval的作用域问题导致的，此时可以考虑将chrome的`来自eval或控制台的匿名脚本`设置打开：
+![1756209045846](image/README/1756209045846.png)
+![1756207983716](image/README/1756207983716.png)
+现在就能解决掉虚拟机中引起的无限debugger。但如果你不想忽略掉来自eval和Function的匿名脚本,可以考虑使用`Bypass_Debugger(备用)`，该脚本只会hook Function和Function.prototype.constructor，并不会影响到eval，所以该脚本针对的是由Function和Function.prototype.constructor引起的无限debugger，如果目标网站是由eval引起的debugger就没办法了。
 
 - <a id="Hook_Function" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_debugger/Hook_Function/Hook_Function.js">hook_debugger/Hook_Function/Hook_Function.js</a>
 
