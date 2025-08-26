@@ -290,7 +290,7 @@ setInterval(dbg,3000);
 4. 如果hook后站点js出现异常，是因为eval的作用域问题导致的，此时可以考虑将chrome的`来自eval或控制台的匿名脚本`设置打开：
 ![1756209045846](image/README/1756209045846.png)
 ![1756207983716](image/README/1756207983716.png)
-现在就能解决掉虚拟机中引起的无限debugger。但如果你不想忽略掉来自eval和Function的匿名脚本,可以考虑使用`Bypass_Debugger(备用)`，该脚本只会hook Function和Function.prototype.constructor，并不会影响到eval，所以该脚本针对的是由Function和Function.prototype.constructor引起的无限debugger，如果目标网站是由eval引起的debugger就没办法了。
+现在就能解决掉由eval和Function引起的无限debugger。但如果你不想忽略掉来自eval和Function的匿名脚本,可以考虑使用`Bypass_Debugger(备用)`，该脚本只会hook Function和Function.prototype.constructor，并不会影响到eval，所以如果目标网站是由eval引起的debugger就没办法了。
 
 - <a id="Hook_Function" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_debugger/Hook_Function/Hook_Function.js">hook_debugger/Hook_Function/Hook_Function.js</a>
 
