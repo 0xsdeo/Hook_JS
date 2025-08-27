@@ -314,10 +314,9 @@ Hook_eval亦是如此，所以要是两个一块用的话可能会出一些问�
 
 ## Contact
 
-如有bug或其他问题可提交issues，或者关注公众号Spade sec联系我。
+如有bug或其他问题可提交issues。
 
 本开源项目微信交流群：
-
 
 ## Star History
 
