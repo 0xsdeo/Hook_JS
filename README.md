@@ -12,6 +12,7 @@
 
 ## 脚本目录
 
+- <a href="#Clear_vue_Navigation_Guards">vue/Clear_vue_Navigation_Guards.js</a>
 - <a href="#hook_table">hook_console/hook_table.js</a>
 - <a href="#Forbidden_log">hook_console/Forbidden_log.js</a>
 - <a href="#hook_localStorage">hook_window/hook_localStorage.js</a>
@@ -37,6 +38,17 @@
 - <a href="#Hook_eval">hook_debugger/Hook_eval</a>
 
 ## 脚本描述及注意事项
+
+- <a id="Clear_vue_Navigation_Guards" href="https://github.com/0xsdeo/Hook_JS/blob/main/vue/Clear_vue_Navigation_Guards.js">vue/Clear_vue_Navigation_Guards.js</a>
+
+脚本描述：清除vue的全局前置守卫和全局解析守卫，清除前会打印出设置路由守卫的方法。
+
+效果：
+![1759058632226](image/README/1759058632226.png)
+全局前置守卫：
+![1759058688710](image/README/1759058688710.png)
+全局解析守卫：
+![1759058717686](image/README/1759058717686.png)
 
 - <a id="hook_table" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_console/hook_table.js">hook_console/hook_table.js</a>
 
