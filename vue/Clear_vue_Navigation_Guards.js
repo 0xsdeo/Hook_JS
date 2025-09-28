@@ -26,6 +26,15 @@
     let temp_push = Array.prototype.push; // 将xxx修改为要hook的方法，temp_xxx变量名可以根据需要进行修改命名
 
     Array.prototype.push = function () { // 将xxx修改为要hook的方法
+        if (arguments.length === 0) {
+            return temp_push.call(this, ...arguments);
+        }
+
+        // 检查第一个参数是否是函数
+        if (typeof arguments[0] !== 'function') {
+            return temp_push.call(this, ...arguments);
+        }
+
         let stack = new Error().stack;
         if (stack.includes('beforeEach') || stack.includes('beforeResolve')) {
             // console.log(stack)
