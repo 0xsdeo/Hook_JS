@@ -4,6 +4,7 @@
 // @version      v1.0
 // @description  清除vue的全局前置守卫和全局解析守卫
 // @author       0xsdeo
+// @run-at       document-start
 // @match        http://*/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        none
