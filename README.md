@@ -45,9 +45,9 @@
 
 效果：
 ![1759058632226](image/README/1759058632226.png)
-全局前置守卫：
+定位到全局前置守卫：
 ![1759058688710](image/README/1759058688710.png)
-全局解析守卫：
+定位到全局解析守卫：
 ![1759058717686](image/README/1759058717686.png)
 
 - <a id="hook_table" href="https://github.com/0xsdeo/Hook_JS/blob/main/hook_console/hook_table.js">hook_console/hook_table.js</a>
