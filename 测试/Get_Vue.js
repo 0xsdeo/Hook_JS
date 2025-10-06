@@ -2,7 +2,7 @@
 // @name         Get_Vue
 // @namespace    https://github.com/0xsdeo/Hook_JS
 // @version      2025-10-05
-// @description  get vue-router
+// @description  try to take over the world!
 // @author       0xsdeo
 // @run-at       document-start
 // @match        *
@@ -35,7 +35,27 @@
     let observer = null;
     let allTimeoutIds = []; // 收集所有定时器ID
     const validInstancesCache = []; // 缓存所有找到的有效实例
-    let hasLoggedInitialScan = false; // 是否已输出初始扫描信息
+    let hasOutputResult = false; // 标记是否已经输出过结果
+
+    // 获取Vue版本
+    function getVueVersion(vueRoot) {
+        let version = vueRoot.__vue_app__?.version ||
+            vueRoot.__vue__?.$root?.$options?._base?.version;
+
+        if (!version || version === 'unknown') {
+            // 尝试从全局Vue对象获取
+            if (window.Vue && window.Vue.version) {
+                version = window.Vue.version;
+            }
+            // 尝试从Vue DevTools获取
+            else if (window.__VUE_DEVTOOLS_GLOBAL_HOOK__ &&
+                window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue) {
+                version = window.__VUE_DEVTOOLS_GLOBAL_HOOK__.Vue.version;
+            }
+        }
+
+        return version || 'unknown';
+    }
 
     // 路径拼接函数
     function joinPath(base, path) {
@@ -101,20 +121,56 @@
         return list;
     }
 
-    // 获取所有Vue根实例的核心函数（每次都完整扫描）
+    // 获取所有Vue根实例的核心函数（带深度限制的BFS扫描）
     function getAllVueRootInstances() {
-        const instances = [];
-        const all = document.querySelectorAll('*');
+        // 如果 body 不存在，返回空数组，等待下次轮询重试
+        if (!document.body) {
+            return [];
+        }
 
-        for (let i = 0; i < all.length; i++) {
-            const el = all[i];
-            // Vue 3
-            if (el.__vue_app__) {
-                instances.push({ element: el, app: el.__vue_app__, version: 3 });
+        const instances = [];
+        const maxDepth = 1000; // 最大搜索深度
+        const queue = [{ node: document.body, depth: 0 }];
+        const visited = new Set(); // 防止重复访问
+
+        while (queue.length > 0) {
+            const { node, depth } = queue.shift();
+
+            // 节点为空，跳过
+            if (!node) {
+                continue;
             }
-            // Vue 2
-            else if (el.__vue__) {
-                instances.push({ element: el, app: el.__vue__, version: 2 });
+
+            // 超过最大深度，跳过
+            if (depth > maxDepth) {
+                continue;
+            }
+
+            // 已访问过，跳过
+            if (visited.has(node)) {
+                continue;
+            }
+            visited.add(node);
+
+            // 只处理元素节点
+            if (node.nodeType !== 1) {
+                continue;
+            }
+
+            // 检查 Vue 3
+            if (node.__vue_app__) {
+                instances.push({ element: node, app: node.__vue_app__, version: 3 });
+            }
+            // 检查 Vue 2
+            else if (node.__vue__) {
+                instances.push({ element: node, app: node.__vue__, version: 2 });
+            }
+
+            // 将子节点加入队列
+            if (node.childNodes && node.childNodes.length > 0) {
+                for (let i = 0; i < node.childNodes.length; i++) {
+                    queue.push({ node: node.childNodes[i], depth: depth + 1 });
+                }
             }
         }
 
@@ -156,105 +212,6 @@
         return null;
     }
 
-    // 消息解包函数（兼容不同版本的 devtools）
-    const VUE_DEVTOOLS_MESSAGE_KEY = '__VUE_DEVTOOLS_VUE_DETECTED_EVENT__';
-    const LEGACY_VUE_DEVTOOLS_MESSAGE_KEY = '_vue-devtools-send-message';
-
-    function unpackVueDevtoolsMessage(data) {
-        if (data.key === VUE_DEVTOOLS_MESSAGE_KEY) {
-            return data.data;
-        } else if (data.key === LEGACY_VUE_DEVTOOLS_MESSAGE_KEY) {
-            return data.message;
-        }
-        return data;
-    }
-
-    // 激活Vue 2 devtools
-    function crackVue2(Vue) {
-        if (!Vue) {
-            return false;
-        }
-        const devtools = window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
-        if (devtools) {
-            Vue.config.devtools = true;
-            devtools.enabled = true; // 确保 devtools 启用
-            devtools.emit('init', Vue);
-            console.log('✅ Vue 2 Devtools 已激活');
-        }
-        return true;
-    }
-
-    // 激活Vue 3 devtools
-    function crackVue3(app) {
-        if (!app) {
-            return false;
-        }
-        const devtools = window.__VUE_DEVTOOLS_GLOBAL_HOOK__;
-        if (devtools) {
-            devtools.enabled = true;
-            const version = app.version;
-            devtools.emit('app:init', app, version, {
-                Fragment: Symbol.for('v-fgt'),
-                Text: Symbol.for('v-txt'),
-                Comment: Symbol.for('v-cmt'),
-                Static: Symbol.for('v-stc'),
-            });
-            console.log('✅ Vue 3 Devtools 已激活');
-        }
-        return true;
-    }
-
-    // 监听 devtools 消息并响应（关键：实现 replay 机制）
-    function listenVueDevtoolsMessage() {
-        const messageHandler = (e) => {
-            try {
-                if (!window.__VUE_DEVTOOLS_GLOBAL_HOOK__) return;
-
-                const data = unpackVueDevtoolsMessage(e.data);
-
-                // 检测到 Vue 但 devtools 未启用的情况
-                if (e.source === window && data.vueDetected && !data.devtoolsEnabled) {
-                    // 标记为已启用，避免无限循环
-                    data.devtoolsEnabled = true;
-
-                    // 执行激活
-                    let crackSuccess = false;
-                    if (window.__VUE__) {
-                        // Vue 3
-                        const instances = getAllVueRootInstances();
-                        const vue3Instance = instances.find(inst => inst.version === 3);
-                        if (vue3Instance) {
-                            crackSuccess = crackVue3(vue3Instance.app);
-                        }
-                    } else {
-                        // Vue 2
-                        const instances = getAllVueRootInstances();
-                        const vue2Instance = instances.find(inst => inst.version === 2);
-                        if (vue2Instance) {
-                            const Vue = Object.getPrototypeOf(vue2Instance.app).constructor;
-                            let RootVue = Vue;
-                            while (RootVue.super) {
-                                RootVue = RootVue.super;
-                            }
-                            crackSuccess = crackVue2(RootVue);
-                        }
-                    }
-
-                    // 关键：重新发送消息给 devtools（replay）
-                    if (crackSuccess) {
-                        window.postMessage(e.data, '*');
-                        // 激活成功后可以移除监听器
-                        window.removeEventListener('message', messageHandler);
-                    }
-                }
-            } catch (err) {
-                console.error('❌ Devtools 消息处理失败:', err);
-            }
-        };
-
-        window.addEventListener('message', messageHandler);
-    }
-
     // 尝试获取实例并返回有Router的结果
     function tryGetInstances() {
         const instances = getAllVueRootInstances();
@@ -264,7 +221,6 @@
         }
 
         const validInstances = [];
-        const newRouterInstances = []; // 记录新发现的 Router 实例
 
         // 遍历所有实例，找出有Router的
         for (const { element, app, version } of instances) {
@@ -275,65 +231,35 @@
                 const alreadyCached = validInstancesCache.some(cached => cached.routerInstance === routerInstance);
 
                 if (!alreadyCached) {
-                    // 激活devtools
-                    if (version === 3) {
-                        crackVue3(app);
-                    } else if (version === 2) {
-                        const Vue = Object.getPrototypeOf(app).constructor;
-                        let RootVue = Vue;
-                        while (RootVue.super) {
-                            RootVue = RootVue.super;
-                        }
-                        crackVue2(RootVue);
-                    }
-
                     // 获取所有路由
                     const allRoutes = listAllRoutes(routerInstance);
+
+                    // 获取具体版本号
+                    const vueVersion = getVueVersion(element);
+
                     const instanceInfo = {
                         element: element,
                         vueInstance: app,
                         routerInstance: routerInstance,
                         version: version,
+                        vueVersion: vueVersion,
                         routes: allRoutes
                     };
 
                     validInstances.push(instanceInfo);
                     validInstancesCache.push(instanceInfo); // 加入缓存
-                    newRouterInstances.push(instanceInfo); // 记录新实例
+
+                    // 立即输出新发现的Router
+                    const instanceIndex = validInstancesCache.length;
+                    console.log(`\n📋 Vue Router 路由列表 [实例 ${instanceIndex} - Vue ${vueVersion}]：`);
+                    console.table(allRoutes.map(route => ({
+                        Name: route.name || '(unnamed)',
+                        Path: route.path
+                    })));
+                    console.log(`\n🔗 Vue Router 实例 [${instanceIndex}]：`);
+                    console.log(routerInstance);
                 }
             }
-        }
-
-        // 只在发现新的 Router 实例时输出
-        if (newRouterInstances.length > 0) {
-            console.log(`🔎 扫描到 ${instances.length} 个Vue实例`);
-
-            newRouterInstances.forEach(info => {
-                // 安全获取 className（处理 SVGAnimatedString 等特殊情况）
-                let className = '';
-                if (info.element.className) {
-                    if (typeof info.element.className === 'string') {
-                        className = info.element.className.split(' ')[0];
-                    } else if (info.element.className.baseVal) {
-                        // SVG 元素的 className 是 SVGAnimatedString 对象
-                        className = info.element.className.baseVal.split(' ')[0];
-                    }
-                }
-                const elDesc = `${info.element.tagName}${info.element.id ? '#' + info.element.id : ''}${className ? '.' + className : ''}`;
-                console.log(`  └─ Vue${info.version} 实例: ${elDesc} ✅ 含Router`);
-                console.log(`  📋 该实例共有 ${info.routes.length} 个路由`);
-                console.log(info.routes);
-            });
-
-            // 输出当前所有Router实例的路由表格
-            console.log(`\n📋 当前共 ${validInstancesCache.length} 个Router实例的所有路由：`);
-            console.table(validInstancesCache.flatMap((inst, idx) =>
-                inst.routes.map(route => ({
-                    Instance: idx + 1,
-                    Name: route.name || '(unnamed)',
-                    Path: route.path
-                }))
-            ));
         }
 
         return validInstances.length > 0 ? validInstances : null;
@@ -342,18 +268,14 @@
     // DOM变化监控函数
     function startDOMObserver() {
         // 立即尝试一次完整遍历
-        const result = tryGetInstances();
-        if (!hasLoggedInitialScan) {
-            hasLoggedInitialScan = true;
-            if (result) {
-                console.log(`🎉 初始扫描完成，找到 ${result.length} 个含Router的Vue实例`);
-            } else {
-                console.log('ℹ️ 初始扫描完成，暂未找到含Router的Vue实例');
-            }
-        }
+        tryGetInstances();
 
         // 创建 MutationObserver 持续监控 DOM 变化
         observer = new MutationObserver((mutations) => {
+            if (hasOutputResult) {
+                return; // 检测已结束，跳过后续监控
+            }
+
             // 检查是否有新增的元素节点
             let hasNewNodes = false;
             for (const mutation of mutations) {
@@ -364,8 +286,7 @@
             }
 
             if (hasNewNodes) {
-                // 有新节点添加，尝试获取实例
-                // tryGetInstances 内部会判断是否有新 Router 实例，有的话会自动输出
+                // 有新节点添加，尝试获取实例（会自动输出新发现的Router）
                 tryGetInstances();
             }
         });
@@ -379,13 +300,35 @@
         });
     }
 
+    // 清理资源
+    function cleanupResources() {
+        if (hasOutputResult) {
+            return; // 已经清理过，跳过
+        }
+
+        hasOutputResult = true;
+
+        // 清理所有定时器并停止监控
+        allTimeoutIds.forEach(id => clearTimeout(id));
+        allTimeoutIds = [];
+        if (observer) {
+            observer.disconnect();
+            observer = null;
+        }
+
+        // 输出检测结束信息
+        if (validInstancesCache.length === 0) {
+            console.log('❌ 未找到任何含Router的Vue实例');
+        }
+    }
+
     // 后备轮询重试机制
     function startPollingRetry() {
         let delay = 100;
         let detectRemainingTries = 5;
 
         function executeDetection() {
-            // 尝试获取（tryGetInstances 内部会在发现新 Router 实例时自动输出）
+            // 尝试获取（会自动输出新发现的Router）
             tryGetInstances();
 
             if (detectRemainingTries > 0) {
@@ -396,25 +339,8 @@
                 allTimeoutIds.push(timeoutId);
                 delay *= 2;
             } else {
-                // 达到最大重试次数，输出轮询阶段统计
-                console.log('🏁 轮询阶段结束');
-                if (validInstancesCache.length > 0) {
-                    console.log(`✅ 轮询阶段找到 ${validInstancesCache.length} 个含Router的Vue实例`);
-                    console.log('📋 所有路由详情：');
-                    console.table(validInstancesCache.flatMap((inst, idx) =>
-                        inst.routes.map(route => ({
-                            Instance: idx + 1,
-                            Name: route.name || '(unnamed)',
-                            Path: route.path
-                        }))
-                    ));
-                } else {
-                    console.log('ℹ️ 轮询阶段未找到含Router的Vue实例（MutationObserver将继续监控）');
-                }
-
-                // 清理所有定时器
-                allTimeoutIds.forEach(id => clearTimeout(id));
-                allTimeoutIds = [];
+                // 达到最大重试次数，清理资源
+                cleanupResources();
             }
         }
 
@@ -427,11 +353,6 @@
 
     // 主执行逻辑
     function init() {
-        console.log('🚀 Vue & Router 获取脚本启动...');
-
-        // 启动 devtools 消息监听（关键：让 devtools 能够识别）
-        listenVueDevtoolsMessage();
-
         // 如果 DOM 还在加载
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => {
