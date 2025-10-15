@@ -2,6 +2,8 @@
 
 本项目脚本配置教程视频：`https://www.bilibili.com/video/BV1rG9oYzEUH/`
 
+依照本项目开发的前端反调试插件：https://github.com/0xsdeo/AntiDebug_Breaker
+
 ## 必看说明
 
 1. 以下所有hook脚本在油猴里的运行时期皆为**document-start**。
