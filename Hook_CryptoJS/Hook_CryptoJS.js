@@ -80,9 +80,8 @@
             }
         }
         else if (arguments.length === 2 && arguments[1] && typeof arguments[1] === 'object' && arguments[1].length === 3 && hasDecryptProp(arguments[1][1])){
-            console.log(arguments)
             if (Object.hasOwn(arguments[0],"$super") && Object.hasOwn(arguments[0],"init")) {
-                if (this.toString().indexOf('function()') !== -1) {
+                if (this.toString().indexOf('function()') === -1 && arguments[1][0] === 2) {
                     let key = arguments[1][1];
                     console.log("解密Hex key：",key.toString());
                     if (Object.hasOwn(arguments[1][2],"iv")) {
