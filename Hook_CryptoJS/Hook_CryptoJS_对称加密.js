@@ -61,8 +61,8 @@
         return true;
     }
 
-    function get_sigBytes(number) {
-        switch (number) {
+    function get_sigBytes(size) {
+        switch (size) {
             case 8:
                 return "64bits";
             case 16:
@@ -80,46 +80,43 @@
 
     Function.prototype.apply = function () {
         if (arguments.length === 2 && arguments[1] && typeof arguments[1] === 'object' && arguments[1].length === 1 && hasEncryptProp(arguments[1][0])) {
-            if (Object.hasOwn(arguments[0],"$super") && Object.hasOwn(arguments[0],"init")) {
+            if (Object.hasOwn(arguments[0], "$super") && Object.hasOwn(arguments[0], "init")) {
                 if (this.toString().indexOf('function()') !== -1) {
                     console.log(...arguments);
-                    console.log("加密后的密文：",arguments[0].$super.toString.call(arguments[1][0]));
-                    console.log("加密Hex key：",arguments[1][0]["key"].toString());
+                    console.log("加密后的密文：", arguments[0].$super.toString.call(arguments[1][0]));
+                    console.log("加密Hex key：", arguments[1][0]["key"].toString());
                     if (arguments[1][0]["iv"]) {
-                        console.log("加密Hex iv：",arguments[1][0]["iv"].toString());
-                    }
-                    else{
+                        console.log("加密Hex iv：", arguments[1][0]["iv"].toString());
+                    } else {
                         console.log("加密时未用到iv")
                     }
-                    console.log("加密时的填充模式：",arguments[1][0]["padding"]);
-                    if (Object.hasOwn(arguments[1][0]["mode"],"Encryptor")) {
-                        console.log("加密时的运算模式：",arguments[1][0]["mode"]["Encryptor"]["processBlock"]);
+                    if (arguments[1][0]["padding"]) {
+                        console.log("加密时的填充模式：", arguments[1][0]["padding"]);
                     }
-                    if (Object.hasOwn(arguments[1][0]["key"],"sigBytes")) {
-                        console.log("加密时的密钥长度：",get_sigBytes(arguments[1][0]["key"]["sigBytes"]));
+                    if (arguments[1][0]["mode"] && Object.hasOwn(arguments[1][0]["mode"], "Encryptor")) {
+                        console.log("加密时的运算模式：", arguments[1][0]["mode"]["Encryptor"]["processBlock"]);
+                    }
+                    if (arguments[1][0]["key"] && Object.hasOwn(arguments[1][0]["key"], "sigBytes")) {
+                        console.log("加密时的密钥长度：", get_sigBytes(arguments[1][0]["key"]["sigBytes"]));
                     }
                     console.log("%c---------------------------------------------------------------------", "color: green;");
                 }
             }
-        }
-        else if (arguments.length === 2 && arguments[1] && typeof arguments[1] === 'object' && arguments[1].length === 3 && hasDecryptProp(arguments[1][1])){
-            if (Object.hasOwn(arguments[0],"$super") && Object.hasOwn(arguments[0],"init")) {
+        } else if (arguments.length === 2 && arguments[1] && typeof arguments[1] === 'object' && arguments[1].length === 3 && hasDecryptProp(arguments[1][1])) {
+            if (Object.hasOwn(arguments[0], "$super") && Object.hasOwn(arguments[0], "init")) {
                 if (this.toString().indexOf('function()') === -1 && arguments[1][0] === 2) {
                     console.log(...arguments);
-                    let key = arguments[1][1];
-                    console.log("解密Hex key：",key.toString());
-                    if (Object.hasOwn(arguments[1][2],"iv")) {
-                        let iv = arguments[1][2]["iv"];
-                        console.log("解密Hex iv：",iv.toString());
-                    }
-                    else {
+                    console.log("解密Hex key：", arguments[1][1].toString());
+                    if (Object.hasOwn(arguments[1][2], "iv") && arguments[1][2]["iv"]) {
+                        console.log("解密Hex iv：", arguments[1][2]["iv"].toString());
+                    } else {
                         console.log("解密时未用到iv")
                     }
-                    if (Object.hasOwn(arguments[1][2],"padding")) {
-                        console.log("解密时的填充模式：",arguments[1][2]["padding"]);
+                    if (Object.hasOwn(arguments[1][2], "padding") && arguments[1][2]["padding"]) {
+                        console.log("解密时的填充模式：", arguments[1][2]["padding"]);
                     }
-                    if (Object.hasOwn(arguments[1][2],"mode")) {
-                        console.log("解密时的运算模式：",arguments[1][2]["mode"]["Encryptor"]["processBlock"]);
+                    if (Object.hasOwn(arguments[1][2], "mode") && arguments[1][2]["mode"]) {
+                        console.log("解密时的运算模式：", arguments[1][2]["mode"]["Encryptor"]["processBlock"]);
                     }
                     console.log("%c---------------------------------------------------------------------", "color: green;");
                 }
