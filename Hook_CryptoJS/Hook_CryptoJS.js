@@ -58,8 +58,13 @@
                 if (this.toString().indexOf('function()') !== -1) {
                     console.log(...arguments);
                     console.log("加密后的密文：",arguments[0].$super.toString.call(arguments[1][0]));
-                    console.log("加密的key：",arguments[1][0]["key"].toString());
-                    console.log("加密的iv：",arguments[1][0]["iv"].toString());
+                    console.log("加密Hex key：",arguments[1][0]["key"].toString());
+                    if (arguments[1][0]["iv"]) {
+                        console.log("加密Hex iv：",arguments[1][0]["iv"].toString());
+                    }
+                    else{
+                        console.log("加密时未用到iv")
+                    }
                 }
             }
         }
