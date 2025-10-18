@@ -13,6 +13,8 @@
 (function () {
     'use strict';
 
+    let time = 0;
+
     function hasEncryptProp(obj) {
         const requiredProps = [
             'ciphertext',
@@ -117,6 +119,10 @@
                     }
                     if (Object.hasOwn(arguments[1][2], "mode") && arguments[1][2]["mode"]) {
                         console.log("解密时的运算模式：", arguments[1][2]["mode"]["Encryptor"]["processBlock"]);
+                    }
+                    if (time === 0) {
+                        console.log("可使用我的脚本进行fuzz加解密参数（算法、模式、填充方式等）：https://github.com/0xsdeo/Fuzz_Crypto_Algorithms");
+                        time += 1;
                     }
                     console.log("%c---------------------------------------------------------------------", "color: green;");
                 }
