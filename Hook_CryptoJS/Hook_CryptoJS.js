@@ -61,6 +61,21 @@
         return true;
     }
 
+    function get_sigBytes(number) {
+        switch (number) {
+            case 8:
+                return "64bits";
+            case 16:
+                return "128bits";
+            case 22:
+                return "192bits";
+            case 32:
+                return "256bits";
+            default:
+                return "未获取到";
+        }
+    }
+
     let temp_apply = Function.prototype.apply;
 
     Function.prototype.apply = function () {
@@ -76,12 +91,21 @@
                     else{
                         console.log("加密时未用到iv")
                     }
+                    console.log("加密时的填充模式：",arguments[1][0]["padding"]);
+                    if (Object.hasOwn(arguments[1][0]["mode"],"Encryptor")) {
+                        console.log("加密时的运算模式：",arguments[1][0]["mode"]["Encryptor"]["processBlock"]);
+                    }
+                    if (Object.hasOwn(arguments[1][0]["key"],"sigBytes")) {
+                        console.log("加密时的密钥长度：",get_sigBytes(arguments[1][0]["key"]["sigBytes"]));
+                    }
+                    console.log("%c---------------------------------------------------------------------", "color: green;");
                 }
             }
         }
         else if (arguments.length === 2 && arguments[1] && typeof arguments[1] === 'object' && arguments[1].length === 3 && hasDecryptProp(arguments[1][1])){
             if (Object.hasOwn(arguments[0],"$super") && Object.hasOwn(arguments[0],"init")) {
                 if (this.toString().indexOf('function()') === -1 && arguments[1][0] === 2) {
+                    console.log(...arguments);
                     let key = arguments[1][1];
                     console.log("解密Hex key：",key.toString());
                     if (Object.hasOwn(arguments[1][2],"iv")) {
@@ -91,6 +115,7 @@
                     else {
                         console.log("解密时未用到iv")
                     }
+                    console.log("%c---------------------------------------------------------------------", "color: green;");
                 }
             }
         }
