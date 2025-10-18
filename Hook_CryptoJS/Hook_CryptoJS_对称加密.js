@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Hook_CryptoJS
+// @name         Hook_CryptoJS_对称加密
 // @namespace    https://github.com/0xsdeo/Hook_JS
 // @version      2025-10-17
-// @description  Hook CryptoJS
+// @description  Hook CryptoJS所有对称加密
 // @author       0xsdeo
 // @run-at       document-start
 // @match        *
@@ -114,6 +114,12 @@
                     }
                     else {
                         console.log("解密时未用到iv")
+                    }
+                    if (Object.hasOwn(arguments[1][2],"padding")) {
+                        console.log("解密时的填充模式：",arguments[1][2]["padding"]);
+                    }
+                    if (Object.hasOwn(arguments[1][2],"mode")) {
+                        console.log("解密时的运算模式：",arguments[1][2]["mode"]["Encryptor"]["processBlock"]);
                     }
                     console.log("%c---------------------------------------------------------------------", "color: green;");
                 }
