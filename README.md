@@ -14,6 +14,7 @@
 
 ## 脚本目录
 
+- <a href="#Hook_CryptoJS">Hook_CryptoJS/Hook_CryptoJS_对称加密.js</a>
 - <a href="#Clear_vue_Navigation_Guards">vue/Clear_vue_Navigation_Guards.js</a>
 - <a href="#hook_table">hook_console/hook_table.js</a>
 - <a href="#Forbidden_log">hook_console/Forbidden_log.js</a>
@@ -21,7 +22,6 @@
 - <a href="#hook_sessionStorage">hook_window/hook_sessionStorage.js</a>
 - <a href="#Hook_innerHTML">Hook_xss/Hook_innerHTML.js</a>
 - <a href="#Hook_outerHTML">Hook_xss/Hook_outerHTML.js</a>
-- <a href="#Hook_CryptoJS">Hook_CryptoJS/Hook_CryptoJS(未完成作).js</a>
 - <a href="#Hook_fetch">Hook_fetch.js</a>
 - <a href="#Fixed_window_size">实用小脚本/Fixed_window_size.js</a>
 - <a href="#bypass_format_detection">实用小脚本/过格式化检测.js</a>
@@ -40,6 +40,27 @@
 - <a href="#Hook_eval">hook_debugger/Hook_eval</a>
 
 ## 脚本描述及注意事项
+
+- <a id="Hook_CryptoJS" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_CryptoJS/Hook_CryptoJS_%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86.js">Hook_CryptoJS/Hook_CryptoJS_对称加密.js</a>
+
+脚本描述：Hook CryptoJS所有对称加密。
+
+效果：
+
+AES加解密：
+![1760863332285](image/README/1760863332285.png)
+DES加解密：
+![1760863365428](image/README/1760863365428.png)
+TripleDES加解密：
+![1760863405949](image/README/1760863405949.png)
+Rabbit加解密：
+![1760863444053](image/README/1760863444053.png)
+RC4加解密：
+![1760863464277](image/README/1760863464277.png)
+RC4Drop加解密：
+![1760863495710](image/README/1760863495710.png)
+
+如果解密时未获取到运算模式、填充方式，可使用我这个脚本进行Fuzz：`https://github.com/0xsdeo/Fuzz_Crypto_Algorithms`
 
 - <a id="Clear_vue_Navigation_Guards" href="https://github.com/0xsdeo/Hook_JS/blob/main/vue/Clear_vue_Navigation_Guards.js">vue/Clear_vue_Navigation_Guards.js</a>
 
@@ -99,21 +120,6 @@
 
 效果：
 ![1740065836640](image/README/1740065836640.png)
-
-- <a id="Hook_CryptoJS" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_CryptoJS/Hook_CryptoJS(%E6%9C%AA%E5%AE%8C%E6%88%90%E4%BD%9C).js">Hook_CryptoJS/Hook_CryptoJS(未完成作).js</a>
-
-脚本描述：当调用了CryptoJS库中的某个加密/解密方法时会自动打印出加密或解密的明文或密文，并且会打印出调用了该方法的堆栈。
-
-效果：
-![1739811688782](image/README/1739811688782.png)
-
-注意事项：本脚本为未完成作，算法不完整以及可能会有报错，但是我不会再继续对这个脚本进行完善补充，原因有以下两点：
-
-1. CryptoJS是一个现成的实例对象，hook方法只能从它那儿改：
-![1739809037219](image/README/1739809037219.png)
-2. 有的网站在导入CryptoJS库时都会把CryptoJS对象名换成别的，所以我个人认为没有必要再去专门写一个脚本hook这个库。
-
-当然了，如果有大牛想继续完成我未完成的部分，可以通过我的公众号联系我，我代表各位感谢您。
 
 - <a id="Hook_fetch" href="https://github.com/0xsdeo/Hook_JS/blob/main/Hook_fetch.js">Hook_fetch.js</a>
 
