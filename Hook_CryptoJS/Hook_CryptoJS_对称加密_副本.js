@@ -107,7 +107,7 @@
 
                     if (iv) {
                         if (iv.toString() !== "[object Object]") {
-                            console.log("加密Hex iv：", iv);
+                            console.log("加密Hex iv：", iv.toString());
                         } else {
                             console.log("加密Hex iv：由于toString方法并未获取到，请自行使用上方打印的对象进行toString调用输出iv。");
                         }
