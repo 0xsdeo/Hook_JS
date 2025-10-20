@@ -90,14 +90,14 @@
                     if (encrypt_text !== "[object Object]") {
                         console.log("加密后的密文：", encrypt_text);
                     }else {
-                        console.log("加密后的密文：由于toString方式并未获取到，请自行使用上方打印的对象进行toString调用输出密文。");
+                        console.log("加密后的密文：由于toString方法并未获取到，请自行使用上方打印的对象进行toString调用输出密文。");
                     }
 
                     let key = arguments[1][0]["key"].toString();
                     if (key !== "[object Object]") {
                         console.log("加密Hex key：", key);
                     }else {
-                        console.log("加密Hex key：由于toString方式并未获取到，请自行使用上方打印的对象进行toString调用输出key。");
+                        console.log("加密Hex key：由于toString方法并未获取到，请自行使用上方打印的对象进行toString调用输出key。");
                     }
 
                     let iv = arguments[1][0]["iv"];
@@ -107,7 +107,7 @@
                             console.log("加密Hex iv：", iv);
                         }
                         else {
-                            console.log("加密Hex iv：由于toString方式并未获取到，请自行使用上方打印的对象进行toString调用输出iv。");
+                            console.log("加密Hex iv：由于toString方法并未获取到，请自行使用上方打印的对象进行toString调用输出iv。");
                         }
                     } else {
                         console.log("加密时未用到iv")
