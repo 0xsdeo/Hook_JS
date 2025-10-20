@@ -85,10 +85,30 @@
             if (Object.hasOwn(arguments[0], "$super") && Object.hasOwn(arguments[0], "init")) {
                 if (this.toString().indexOf('function()') !== -1) {
                     console.log(...arguments);
-                    console.log("加密后的密文：", arguments[0].$super.toString.call(arguments[1][0]));
-                    console.log("加密Hex key：", arguments[1][0]["key"].toString());
-                    if (arguments[1][0]["iv"]) {
-                        console.log("加密Hex iv：", arguments[1][0]["iv"].toString());
+
+                    let encrypt_text = arguments[0].$super.toString.call(arguments[1][0]);
+                    if (encrypt_text !== "[object Object]") {
+                        console.log("加密后的密文：", encrypt_text);
+                    }else {
+                        console.log("加密后的密文：由于toString方式并未获取到，请自行使用上方打印的对象进行toString调用输出密文。");
+                    }
+
+                    let key = arguments[1][0]["key"].toString();
+                    if (key !== "[object Object]") {
+                        console.log("加密Hex key：", key);
+                    }else {
+                        console.log("加密Hex key：由于toString方式并未获取到，请自行使用上方打印的对象进行toString调用输出key。");
+                    }
+
+                    let iv = arguments[1][0]["iv"];
+
+                    if (iv) {
+                        if (iv.toString() !== "[object Object]"){
+                            console.log("加密Hex iv：", iv);
+                        }
+                        else {
+                            console.log("加密Hex iv：由于toString方式并未获取到，请自行使用上方打印的对象进行toString调用输出iv。");
+                        }
                     } else {
                         console.log("加密时未用到iv")
                     }
