@@ -127,12 +127,25 @@
             if (Object.hasOwn(arguments[0], "$super") && Object.hasOwn(arguments[0], "init")) {
                 if (this.toString().indexOf('function()') === -1 && arguments[1][0] === 2) {
                     console.log(...arguments);
-                    console.log("解密Hex key：", arguments[1][1].toString());
+
+                    let key = arguments[1][1].toString();
+                    if (key !== "[object Object]") {
+                        console.log("解密Hex key：", key);
+                    } else {
+                        console.log("解密Hex key：由于toString方法并未获取到，请自行使用上方打印的对象进行toString调用输出key。");
+                    }
+
                     if (Object.hasOwn(arguments[1][2], "iv") && arguments[1][2]["iv"]) {
-                        console.log("解密Hex iv：", arguments[1][2]["iv"].toString());
+                        let iv = arguments[1][2]["iv"].toString();
+                        if (iv !== "[object Object]") {
+                            console.log("解密Hex iv：", iv);
+                        } else {
+                            console.log("解密Hex iv：由于toString方法并未获取到，请自行使用上方打印的对象进行toString调用输出iv。");
+                        }
                     } else {
                         console.log("解密时未用到iv")
                     }
+
                     if (Object.hasOwn(arguments[1][2], "padding") && arguments[1][2]["padding"]) {
                         console.log("解密时的填充模式：", arguments[1][2]["padding"]);
                     }
