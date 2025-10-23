@@ -163,16 +163,16 @@
             }
             // CryptoJS 哈希 / HMAC
         } else if (arguments.length === 2 && arguments[0] && arguments[1] && typeof arguments[0] === 'object' && typeof arguments[1] === 'object') {
-            if (Object.hasOwn(arguments[0].__proto__, "$super") && Object.hasOwn(arguments[0].__proto__.__proto__, "finalize")) {
+            if (arguments[0].__proto__ && Object.hasOwn(arguments[0].__proto__, "$super") && Object.hasOwn(arguments[0].__proto__, "_doFinalize") && Object.hasOwn(arguments[0].__proto__.__proto__, "finalize")) {
                 if (arguments[0].__proto__.__proto__.finalize.toString().indexOf('哈希/HMAC') === -1) {
                     let temp_finalize = arguments[0].__proto__.__proto__.finalize;
 
                     arguments[0].__proto__.__proto__.finalize = function () {
                         if (!(Object.hasOwn(this, "init"))) {
                             let hash = temp_finalize.call(this, ...arguments);
-                            console.log("哈希/HMAC 加密 明文：", ...arguments);
-                            console.log("哈希/HMAC 密文：", hash.toString());
-                            console.log("哈希/HMAC 密文长度：", hash.toString().length);
+                            console.log("哈希/HMAC 加密 原始数据：", ...arguments);
+                            console.log("哈希/HMAC 加密 密文：", hash.toString());
+                            console.log("哈希/HMAC 加密 密文长度：", hash.toString().length);
                             console.log("注：如果是HMAC加密，本脚本是hook不到密钥的，需自行查找。")
                             console.log("%c---------------------------------------------------------------------", "color: green;");
                             return hash;
