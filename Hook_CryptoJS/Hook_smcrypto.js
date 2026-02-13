@@ -129,6 +129,7 @@
                 console.log("SM4 加密模式:", arguments[2].mode);
             }
         }
+        console.log("SM4 加密密文：",result);
         return result;
     }
 
@@ -151,6 +152,7 @@
                 console.log("SM4 解密模式:", arguments[2].mode);
             }
         }
+        console.log("SM4 解密明文：",result);
         return result;
     }
 
