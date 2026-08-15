@@ -344,4 +344,4 @@ Hook_eval亦是如此，所以要是两个一块用的话可能会出一些问�
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=0xsdeo/Hook_JS&type=Date)](https://star-history.com/#0xsdeo/Hook_JS&Date)
+[![Star History Chart](https://star-history.dera.page/svg?repos=0xsdeo/Hook_JS&type=Date)](https://star-history.dera.page/#0xsdeo/Hook_JS&Date)
